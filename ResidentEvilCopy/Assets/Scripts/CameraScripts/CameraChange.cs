@@ -12,16 +12,16 @@ public class CameraChange : MonoBehaviour
     void Start()
     {
         cameraNumber = 1;
-        StartCoroutine(CameraSwitch());
+       
     }
 
-    IEnumerator CameraSwitch()
+     void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSecondsRealtime(5);
-        theCamera02.SetActive(true);
-        theCamera01.SetActive(false);
-        camOn = true;
-        cameraNumber = 2;
+        if(other.tag == "Player")
+        {
+            theCamera02.SetActive(true);
+            theCamera01.SetActive(false);
+        }
     }
 
 }
