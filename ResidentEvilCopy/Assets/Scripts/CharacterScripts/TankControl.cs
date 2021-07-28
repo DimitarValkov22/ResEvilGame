@@ -8,22 +8,53 @@ public class TankControl : MonoBehaviour
     public bool isMoving;
     public float horizontalMove;
     public float verticalMove;
+    public bool isRunning;
+    public bool backwardsCheck = false;
     
     void Update()
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isRunning = true;
+        }
+        else
+        {
+            isRunning = false;
+        }
+
         if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
         {
             isMoving = true;
             if (Input.GetButton("Backwards"))
             {
+                backwardsCheck = true;
                 thePlayer.GetComponent<Animator>().Play("Backwards");
             }
             else
             {
-                thePlayer.GetComponent<Animator>().Play("Walk");
+                backwardsCheck = false;
+
+                if(isRunning == false)
+                {
+                   thePlayer.GetComponent<Animator>().Play("Walk");
+                }
+                else
+                {
+                    thePlayer.GetComponent<Animator>().Play("Run");
+                }
+                
             }
+            if(isRunning == false)
+            {
+                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 4;
+            }
+
+            if(isRunning == true && backwardsCheck == false)
+            {
+                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 13;
+            }
+
             horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * 150;
-            verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 4;
             thePlayer.transform.Rotate(0, horizontalMove, 0);
             thePlayer.transform.Translate(0, 0, verticalMove);
         }
