@@ -5588,8 +5588,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1161665528}
   - component: {fileID: 1161665529}
+  - component: {fileID: 1161665530}
   m_Layer: 0
-  m_Name: MenuControl
+  m_Name: AreaControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5629,6 +5630,20 @@ MonoBehaviour:
   isOpen: 0
   MenuClose: {fileID: 292979946}
   canClose: 0
+--- !u!114 &1161665530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161665527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387f310971def6447ba284faf2d9e336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thePlayer: {fileID: 1100775406}
+  horizontalMove: 0
 --- !u!1 &1184747890
 GameObject:
   m_ObjectHideFlags: 0

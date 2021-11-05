@@ -13,55 +13,58 @@ public class TankControl : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (WeaponMech.isAiming == false)
         {
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
-
-        if(Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-        {
-            isMoving = true;
-            if (Input.GetButton("Backwards"))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                backwardsCheck = true;
-                thePlayer.GetComponent<Animator>().Play("Backwards");
+                isRunning = true;
             }
             else
             {
-                backwardsCheck = false;
+                isRunning = false;
+            }
 
-                if(isRunning == false)
+            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+            {
+                isMoving = true;
+                if (Input.GetButton("Backwards"))
                 {
-                   thePlayer.GetComponent<Animator>().Play("Walk");
+                    backwardsCheck = true;
+                    thePlayer.GetComponent<Animator>().Play("Backwards");
                 }
                 else
                 {
-                    thePlayer.GetComponent<Animator>().Play("Run");
+                    backwardsCheck = false;
+
+                    if (isRunning == false)
+                    {
+                        thePlayer.GetComponent<Animator>().Play("Walk");
+                    }
+                    else
+                    {
+                        thePlayer.GetComponent<Animator>().Play("Run");
+                    }
+
                 }
-                
-            }
-            if(isRunning == false)
-            {
-                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 4;
-            }
+                if (isRunning == false)
+                {
+                    verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 4;
+                }
 
-            if(isRunning == true && backwardsCheck == false)
-            {
-                verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 13;
-            }
+                if (isRunning == true && backwardsCheck == false)
+                {
+                    verticalMove = Input.GetAxis("Vertical") * Time.deltaTime * 13;
+                }
 
-            horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * 150;
-            thePlayer.transform.Rotate(0, horizontalMove, 0);
-            thePlayer.transform.Translate(0, 0, verticalMove);
-        }
-        else
-        {
-            isMoving = false;
-            thePlayer.GetComponent<Animator>().Play("Idle");
+                horizontalMove = Input.GetAxis("Horizontal") * Time.deltaTime * 150;
+                thePlayer.transform.Rotate(0, horizontalMove, 0);
+                thePlayer.transform.Translate(0, 0, verticalMove);
+            }
+            else
+            {
+                isMoving = false;
+                thePlayer.GetComponent<Animator>().Play("Idle");
+            }
         }
     }
 }
